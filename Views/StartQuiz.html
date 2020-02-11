@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<script>
+
+
+
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: "../Controllers/StartQuiz.php",
+            data: "",
+            async: false,
+            success: function (data) {
+                var examArr = JSON.parse(data);
+
+                $(".kanji").text(examArr[0][0]);
+                $(".hiragana").text(examArr[0][1]);
+                $(".mean").text(examArr[0][2]);
+                $(".total").text(data);
+            }
+        });
+    });
+
+    var index = 1;
+
+    function test() {
+        var data = $(".total").text();
+
+        totalArr = JSON.parse(data);
+        console.log(totalArr)
+        $(".kanji").text(totalArr[index][0]);
+        $(".hiragana").text(totalArr[index][1]);
+        $(".mean").text(totalArr[index][2]);
+
+        index++;
+    }
+
+</script>
+
+<body>
+    <div class="container">
+        <div class="total" hidden>
+
+        </div>
+        <div class="kanji" onclick="test()">
+
+        </div>
+        <div class="hiragana">
+
+        </div>
+        <div class="mean">
+
+        </div>
+    </div>
+</body>
+
+</html>
